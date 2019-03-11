@@ -7,5 +7,8 @@ module.exports = function(app) {
 
     app.post("/api/friends", function(req, res) {
         //post data from the survey
+        friendsData.push(req.body);
+        res.json(true);
     });
 }
+
