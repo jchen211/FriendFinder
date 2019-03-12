@@ -12,26 +12,27 @@ module.exports = function(app) {
 
         var newFriendInfo = req.body;
         var newFriendScore = newFriendInfo.score;
-          
-        var matchedName = "";
-        var matchedPhoto = " ";
-        var totalDiff = 50;
+        
+        var matchFriend = {
+             matchedName: "",
+             matchedPhoto: "",
+             totalDiff: 50
+        };
 
         for (var i = 0; i < friendsData.length; i++) {
 
             var diff = 0;
 
-            for (var j =0; j < newFriendScore.length; j++) {
-                diff += Math.abs(friendsData[i].scores[j] - newFriendInfo[j]);
+            for (var j = 0; j < friendsData[i].score.length; j++) {
+                diff += Math.abs(friendsData[i].score[j] - newFriendScore[j]);
             }
-                if (diff < totalDiff) {
-                    totalDiff = diff;
-                    matchedName = friendsData[i].name;
-                    matchedPhoto = friendsData[i].photo;
+                if (diff <= matchFriend.totalDiff) {
+                    matchFriend.matchedName = friendsData[i].name;
+                    matchFriend.matchedPhoto = friendsData[i].photo;
                 }
             }
-        friendsData.push(req.body);
-        res.json(true);
+        friendsData.push(newFriendInfo);
+        res.json(matchFriend);
     });
 }
 

@@ -166,7 +166,8 @@
             </button>
         </div>
         <h4 class="modal-body"></h4>
-        <img class="modal-image">
+        <h6 id="fName"></h6>
+        <img id="fImage">
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
@@ -183,6 +184,8 @@
 
     $(".btn").on("click", function(event) {
             event.preventDefault();
+            
+            $("#showModal").modal("toggle");
 
             var newFriend = {
                 friendName: $("#name").val().trim(),
@@ -202,11 +205,10 @@
             };
 
             $.post("/api/friends", newFriend, function(data) {
-              
-               $(".modal-body").text(data.friendName);
-               $(".modal-image").attr("src", data.photo);
-               $("#showModal").modal("toggle");
-
+               
+               $("#fName").text(data.matchedname);
+               $("#fImage").attr("src", data.matchedphoto);
+                
                 $("#name").val(""),
                 $("#addedImage").val(""),
                 $("#q1").val(""),
