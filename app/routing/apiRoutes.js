@@ -14,7 +14,7 @@ module.exports = function(app) {
         var newFriendScore = newFriendInfo.score;
           
         var matchedName = "";
-        var matchedPhoto = "";
+        var matchedPhoto = " ";
         var totalDiff = 50;
 
         for (var i = 0; i < friendsData.length; i++) {
